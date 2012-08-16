@@ -59,6 +59,6 @@ def setbits16(n, chunk_size=8):
     return sum((lookup[part] for part in chunk(n, chunk_size)))
                    
 if __name__ == "__main__":
-    nums = map(lambda x: randbin(16), xrange(1000))
+    nums = (randbin(16) for x in xrange(1000))
     print lookup.keys()
     print sum(map(lambda n: setbits16(pad(n, 16)), nums))
