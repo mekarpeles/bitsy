@@ -28,7 +28,7 @@ def pad(n, bits=8):
 # memoization, but my guess due to spacial locality it's better to get
 # it down all at once and not context switch
 lookup = dict((pad(str(b), 8), b.count('1')) for b in \
-                  map(lambda n: str(bin(n)[2:]), range(0, 256)))
+                  (str(bin(n)[2:]) for n in range(0, 256)))
 
 def randbin(bits=16):
     """Generates a str representation of a random binary 'bits' length
@@ -56,7 +56,7 @@ def setbits16(n, chunk_size=8):
     >>> setbits16('10010111', chunk_size=8)
     5
     """
-    return sum(map(lambda x: lookup[x], chunk(n, chunk_size)))
+    return sum((lookup[part] for part in chunk(n, chunk_size)))
                    
 if __name__ == "__main__":
     nums = map(lambda x: randbin(16), xrange(1000))
