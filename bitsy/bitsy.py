@@ -138,5 +138,5 @@ if __name__ == "__main__":
     t0 = time.clock()
     x = sum(map(lambda n: setbits(pad(n, binary_digits), dictionary, 
                                   chunk_size=chunk_size), nums))
-    print "Haming Weight: {} ({} seconds)".format(x, time.clock() - t0)
+    print "Hamming Weight: {} ({} seconds)".format(x, time.clock() - t0)
 
