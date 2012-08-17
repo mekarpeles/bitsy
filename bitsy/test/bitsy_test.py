@@ -1,6 +1,8 @@
 import unittest
 from bitsy import bitsy
 
+dictionary = bitsy.create_lookup(8)
+
 class BitsyTest(unittest.TestCase):
 
     def test_padding(self):
@@ -24,23 +26,24 @@ class BitsyTest(unittest.TestCase):
                         "bitsy.randbin expected return type str, " \
                             "instead is: {}".format(type(randbin)))
 
-    def test_setbits16(self):
+    def test_setbits(self):
         """Checks that the number of 1's found in the str
         representation of the binary number in calculated correctly by
         bitsy.setbits16
         """
         bnum = '1011010110100110'
         expected = 9
-        actual = bitsy.setbits16(bnum)
+        actual = bitsy.setbits(bnum, dictionary)
         self.assertTrue(expected == actual, "Inconsistent results for bitsy.setbits16, " \
                             "expected {} bits set, found {}".format(expected, actual))
 
-    def test_chunking(self):        
+    def test_chunking(self):
         chunk_size = 8
         bnum = '1011010110100110'
         expected = ['10110101', '10100110']
-        actual = bitsy.chunk(bnum, chunk_size)
-        self.assertTrue(len(actual) == len(bnum)/chunk_size,
+        actual = list(bitsy.chunk(bnum, chunk_size))
+        # generator 'actual' converted to list to make len() available
+        self.assertTrue(len(list(actual)) == len(bnum)/chunk_size,
                         "The number of chunks is not consistent with the expected "\
                             "output for bitsy.chunk")
         self.assertTrue(actual == expected, "Incorrect output for bitsy.chunk" \
