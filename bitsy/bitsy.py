@@ -61,7 +61,7 @@ def hamming_weight(n):
         c += 1
     return c
 
-def setbits(n, dictionary, chunk_size=8):
+def setbits(n, dictionary, chunk_size=None):
     """Counts the number of set bits (the number of occurences of 1)
     within a n-bit binary number. Uses a dict lookup table 
 
@@ -83,8 +83,8 @@ def create_lookup(bits):
     >>> create_lookpup(3)
     {"000": 0, "001": 1, "010": 1, "011": 2, "100": 1, "101": 2, "111": 6}
     """
-    return dict((pad(str(b), bits), b.count('1')) for b in \
-                    (str(bin(n)[2:]) for n in range(0, 2**(bits+1))))
+    return dict((pad(b, bits), b.count('1')) for b in \
+                    (bin(n)[2:] for n in range(0, 2**(bits+1))))
 
 def _benchmark(nums, samples, binary_digits, chunk_size, dictionary, attempts=1000000):
     """Enabling garbage collection for tests
@@ -102,8 +102,8 @@ def _benchmark(nums, samples, binary_digits, chunk_size, dictionary, attempts=10
 
 def setup():
     """Configures argparser to handle command line arguments"""
-    parser = argparse.ArgumentParser(description='Calculates summed hamming weight ' \
-                                         '(num of bits set to 1) for x, n-bit numbers.')
+    parser = argparse.ArgumentParser(description='Calculates the summed hamming weight ' \
+                                         '(num of bits set to 1) of x, n-bit numbers.')
     parser.add_argument("--verbose", help="increase output verbosity",
                         action="store_true")
 
