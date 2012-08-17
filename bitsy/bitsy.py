@@ -102,7 +102,7 @@ def _benchmark(nums, samples, binary_digits, chunk_size, dictionary, attempts=10
 
 def setup():
     """Configures argparser to handle command line arguments"""
-    parser = argparse.ArgumentParser(description='Calculates summed hamming weight' \
+    parser = argparse.ArgumentParser(description='Calculates summed hamming weight ' \
                                          '(num of bits set to 1) for x, n-bit numbers.')
     parser.add_argument("--verbose", help="increase output verbosity",
                         action="store_true")
