@@ -51,6 +51,9 @@ def hamming_weight(n):
     """Hamming weight algorithm provided by Brian Kernighan, Peter
     Wegner, Derrick Lehmer. Takes as integer value and returns the
     number of set bits required to represent the number.
+
+    >>> hamming_weight(5) # 0b1001
+    2
     """
     c = 0
     while n > 0:
@@ -62,11 +65,12 @@ def setbits(n, dictionary, chunk_size=8):
     """Counts the number of set bits (the number of occurences of 1)
     within a n-bit binary number. Uses a dict lookup table 
 
-    XXX Add assertion + exception to enforce n % chunksize == 0
-
-    >>> setbits16('10010111', chunk_size=8)
+    >>> setbits('10010111', chunk_size=8)
     5
     """
+    chunk_size = chunk_size if chunk_size else len(str(n))
+    assert len(str(n)) % chunk_size == 0, "Unable to divide {}-bit " \
+        "number {} into equal chunk sizes of length {}" .format(len(str(n)), n, chunk_size)
     return sum((dictionary[part] for part in chunk(n, chunk_size)))
 
 def create_lookup(bits):
