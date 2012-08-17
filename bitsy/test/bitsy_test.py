@@ -29,12 +29,12 @@ class BitsyTest(unittest.TestCase):
     def test_setbits(self):
         """Checks that the number of 1's found in the str
         representation of the binary number in calculated correctly by
-        bitsy.setbits16
+        bitsy.setbits
         """
         bnum = '1011010110100110'
         expected = 9
         actual = bitsy.setbits(bnum, dictionary)
-        self.assertTrue(expected == actual, "Inconsistent results for bitsy.setbits16, " \
+        self.assertTrue(expected == actual, "Inconsistent results for bitsy.setbits, " \
                             "expected {} bits set, found {}".format(expected, actual))
 
     def test_chunking(self):
